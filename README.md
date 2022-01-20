@@ -12,9 +12,9 @@ When you start `NetPassage`, it will display a UI in your terminal with the publ
 
 ## Architecture
 
-`NetPassage`uses Microsoft Azure Service Bus Relay to tunnel all incoming
+`NetPassage` uses Microsoft Azure Service Bus Relay to tunnel all incoming
 messages thru the Relay's hybrid connections (either Websocket or Http) and to
-the remotely running (e.g. local) `NetPassage`client utility's listener, as
+the remotely running (e.g. local) `NetPassage` client utility's listener, as
 shown in the architecture diagram below:
 
 ![Architecture](docs/images/passage.png)
@@ -46,7 +46,7 @@ Bus.
 
     d. "PolicyKey" is the secret key value for the shared access policy.
 
-    e. "TargetServiceAddress" sets the port to be used for localhost. The address and port number should match the address and port used by your bot. For example, `http:/localhost:[PORT]`.
+    e. "TargetServiceAddress" sets the port to be used for localhost. The address and port number should match the address and port used by your bot. For example, `http://localhost:[PORT]`.
 
 If you're going to use the `Websocket` relay, you'd also need to update the values in the **appsettings.json** for the `Microsoft.HybridConnections.Relay` project.
 
@@ -63,7 +63,7 @@ Bus.
 
     d. "PolicyKey" is the secret key value for the shared access policy.
 
-    e. "TargetServiceAddress" sets the port to be used for localhost. The address and port number should match the address and port used by your bot. For example, `http:/localhost:[PORT]`.
+    e. "TargetServiceAddress" sets the port to be used for localhost. The address and port number should match the address and port used by your bot. For example, `http://localhost:[PORT]`.
 
 Before testing the relay, your Azure Web Bot's messaging endpoint must be updated to match the relay.
 
@@ -94,6 +94,22 @@ And, if you're planning on using only `Http` mode, you should only run `NetPassa
 
     b. The .exe will output to the **/bin/debug** folder, along with other necessary files, located in the project’s directory folder. All the files are necessary to run and should be included when moving the .exe to a new folder/location.
     - The **app.config** is in the same folder and can be edited as credentials change without needing to recompile the project.
+
+### Building with Visual Studio for Mac
+
+When building the solution on Mac, the steps are largely the same as shown above with a couple things to keep note of:
+
+1. The **appsettings.json** file may not automatically get moved into **/bin** after building by default. It is required, so ensure it is being properly copied over during build if you run into issues.
+
+2. The `NetPassage` default run configuration may not pass in the required configuration file by default. To fix this, ensure "**NetPassage.json**" is being passed into your default Run Configuration.
+
+    a. Right click the project folder in Visual Studio for Mac and select **Options**.
+
+    b. Under **Run**, select the **Default** configuration.
+
+    c. In the **Arguments** field, enter "**NetPassage.json**".
+
+    d. Select **OK** and retry running `NetPassage` via Visual Studio for Mac.
 
 ## Acknowledgments
 

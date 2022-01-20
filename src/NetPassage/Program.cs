@@ -91,7 +91,7 @@ namespace NetPassage
                         // maintained, and is reestablished when connectivity is disrupted.
                         Program.KeepRunning = RunHttpRelayAsync(httpRelayListener).GetAwaiter().GetResult();
                     }
-                    else // WebSockets Relay Mode 
+                    else // WebSockets Relay Mode
                     {
                         // Create the WebSockets hybrid proxy listener
                         var webSocketListener = new WebSocketListener(
@@ -169,7 +169,7 @@ namespace NetPassage
                 // Send the request message to the target listener
                 var requestMessage = await HttpListener.CreateHttpRequestMessageAsync(context, ConnectionName);
                 var responseMessage = await SendHttpRequestAsync(requestMessage);
-                Logger.LogRequest(requestMessage.Method.Method, requestMessage.RequestUri.LocalPath, $"\u001b[32m {responseMessage.StatusCode} \u001b[0m", $"Forwarded to {TargetHttpRelay}", ShowAll);
+                Logger.LogRequest(requestMessage.Method.Method, requestMessage.RequestUri.LocalPath, $"\u001b[32m {responseMessage.StatusCode} \u001b[0m", $"Forwarded to {TargetHttpRelay}.", ShowAll);
 
                 // Send the response message back to the caller
                 await HttpListener.SendResponseAsync(context, responseMessage);
